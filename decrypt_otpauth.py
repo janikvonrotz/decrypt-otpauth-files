@@ -290,8 +290,12 @@ def decrypt_backup(encrypted_otpauth_backup):
         return
 
     for account in accounts:
-        render_qr_to_terminal(account.otp_uri(), account.type, account.issuer, account.label)
-        input("Press Enter to continue...")
+        # render_qr_to_terminal(account.otp_uri(), account.type, account.issuer, account.label)
+        # input("Press Enter to continue...")
+        show_pass_command(account.otp_uri(), account.type, account.issuer, account.label)
+
+def show_pass_command(otp_uri, type, issuer, label):
+    click.echo(f'echo "{otp_uri}" | pass otp insert "OTP/{issuer}"')
 
 
 def decrypt_backup_10(archive, password):
